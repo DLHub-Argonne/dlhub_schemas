@@ -1,0 +1,65 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "datacite",
+    "description": "Schema for a servable function in DLHub",
+    "type": "object",
+    "properties": {
+        "datacite": {
+            "$ref": "datacite.json#"
+        },
+        "dlhub": {
+            "$ref": "dlhub.json#"
+        },
+        "servable": {
+            "type": "object",
+            "description": "Data needed to run a servable",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "Type of the servable. DLHub has a predefined list of types it knows how to serve."
+                },
+                "language": {
+                    "type": "string",
+                    "language": "Programming language used to invoke the servable"
+                },
+                "dependencies": {
+                    "type": "object",
+                    "description": "List of additional libraries required by the servable. Currently only supports Python",
+                    "properties": {
+                        "python": {
+                            "type": "object",
+                            "additionalProperties": {"string": "string"}
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "model_type": {
+                    "type": "string",
+                    "description": "Simple description of the type of machine learning model"
+                },
+                "model_summary": {
+                    "type": "string",
+                    "description": "Longer-form description of a machine learning model. Contrast to model_type"
+                },
+                "run": {
+                    "type": "object",
+                    "description": "Description of how to invoke a servable",
+                    "properties": {
+                        "handler": {
+                            "type": "string",
+                            "description": "Name of function to be invoked"
+                        },
+                        "input": {
+                            "$ref": "servable/argument_type.json#",
+                            "description": "Input to the servable"
+                        },
+                        "output": {
+                            "$ref": "servable/argument_type.json#",
+                            "description": "Output of the servable"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

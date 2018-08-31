@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "argument_type",
+    "description": "Description of the inputs and outputs to a function",
+    "type": "object",
+    "properties": {
+        "type": {
+            "enum": ["number", "ndarray", "string", "python"],
+            "description": "Type of the argument. Must be one of the types recognized by DLHub."
+        },
+        "description": {
+            "type": "string",
+            "description": "Human-friendly description of the argument"
+        },
+        "shape": {
+            "type": "array",
+            "description": "Shape of an input ndarray, required if type is ndarray. Any dimensions that can be arbitrary sizes may be annotated with `null`. E.g., [null, 4]",
+            "items": {
+                "anyOf": [{"type": "integer", "minimum": 1}, {"type": "null"}]
+            }
+        },
+        "python_type": {
+            "type": "string",
+            "description": "Name of the python type. Give the full module path (e.g., pymatgen.core.Composition)"
+        }
+    },
+    "required": ["type"],
+    "anyOf": [{
+        "properties": {"type": {"enum": ["ndarray"]}},
+        "required": ["shape"]
+    },{
+        "properties": {"type": {"enum": ["python"]}},
+        "required": ["shape"]
+    }]
+}
