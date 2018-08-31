@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "datacite",
+    "description": "Description of a column of a dataset.",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Name of the column"
+        },
+        "description": {
+            "type": "string",
+            "description": "Human-friendly description of the contents of the column"
+        },
+        "type": {
+            "type": "string",
+            "description": "Data type of entries in the column"
+        },
+        "units": {
+            "type": "string",
+            "description": "Units for the data, if applicable"
+        }
+    },
+    "required": ["name", "type"]
+}

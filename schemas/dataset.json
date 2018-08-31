@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "datacite",
+    "description": "Schema for a dataset in DLHub",
+    "type": "object",
+    "properties": {
+        "datacite": {
+            "$ref": "datacite.json#"
+        },
+        "dlhub": {
+            "$ref": "dlhub.json#"
+        },
+        "dataset": {
+            "type": "object",
+            "description": "Data needed to understand the contents of dataset",
+            "properties": {
+                "columns": {
+                    "$ref": "dataset/column.json#"
+                },
+                "location": {
+                    "type": "string",
+                    "description": "Path to the data file"
+                },
+                "format": {
+                    "type": "string",
+                    "description": "Format of the data file (e.g., csv)"
+                },
+                "read_options": {
+                    "type": "object",
+                    "description": "Options used by Pandas to read data file"
+                },
+                "inputs": {
+                    "type": "array",
+                    "description": "List of names of columns that are likely inputs to a model.",
+                    "items": {
+                      "type": "string"
+                    }
+                },
+                "labels": {
+                    "type": "array",
+                    "description": "List of names of columns that are likely outputs of a model.",
+                    "items": {
+                      "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
