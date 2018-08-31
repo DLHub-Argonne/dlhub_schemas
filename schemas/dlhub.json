@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "dlhub",
+    "description": "General metadata for the DLHub service",
+    "type": "object",
+    "properties": {
+        "version": {
+            "type": "string",
+            "description": "Version of the DLHub service"
+        },
+        "domain": {
+            "type": "string",
+            "description": "Scientific application area of the artifact"
+        },
+        "visible_to": {
+            "type": "array",
+            "description": "List of entities that can view this artifact. Can either be a UUID specifying a Globus identity or 'public'",
+            "items": {
+                "type": "string",
+                "description": "Identity allowed to see the artifact",
+                "pattern": "^public$",
+                "anyOf": [{
+                    "type": "string",
+                    "description": "UUID of an allowed identity. Corresponds to a Globus User ID or a Group ID",
+                    "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                },{
+                    "type": "string",
+                    "description": "Specification that model should be openly visible",
+                    "enum": ["public"]
+                }]
+            }
+        }
+    }
+}
