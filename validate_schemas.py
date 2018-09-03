@@ -1,4 +1,4 @@
-from jsonschema import Draft4Validator, RefResolver
+from jsonschema import Draft4Validator
 import jsonref
 import glob
 import os

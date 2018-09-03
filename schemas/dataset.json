@@ -5,7 +5,7 @@
     "type": "object",
     "properties": {
         "datacite": {
-            "$ref": "datacite.json#"
+            "$ref": "datacite-v4.1.json#"
         },
         "dlhub": {
             "$ref": "dlhub.json#"
