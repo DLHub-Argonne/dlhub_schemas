@@ -15,7 +15,11 @@
             "description": "Data needed to understand the contents of dataset",
             "properties": {
                 "columns": {
-                    "$ref": "dataset/column.json#"
+                    "type": "array",
+                    "description": "Description of each column for a tabular dataset",
+                    "items": {
+                        "$ref": "dataset/column.json#"
+                    }
                 },
                 "location": {
                     "type": "string",
