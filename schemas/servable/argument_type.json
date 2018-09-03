@@ -5,7 +5,7 @@
     "type": "object",
     "properties": {
         "type": {
-            "enum": ["number", "ndarray", "string", "python"],
+            "enum": ["number", "ndarray", "string", "python object", "boolean", "integer", "float", "complex", "timedelta", "datetime"],
             "description": "Type of the argument. Must be one of the types recognized by DLHub."
         },
         "description": {
@@ -29,7 +29,7 @@
         "properties": {"type": {"enum": ["ndarray"]}},
         "required": ["shape"]
     },{
-        "properties": {"type": {"enum": ["python"]}},
+        "properties": {"type": {"enum": ["python object"]}},
         "required": ["shape"]
     }]
 }
