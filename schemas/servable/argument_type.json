@@ -25,11 +25,13 @@
         }
     },
     "required": ["type"],
-    "anyOf": [{
+    "oneOf": [{
         "properties": {"type": {"enum": ["ndarray"]}},
         "required": ["shape"]
     },{
         "properties": {"type": {"enum": ["python object"]}},
-        "required": ["shape"]
-    }]
+        "required": ["python_type"]
+    }, {"not" :{
+        "properties": {"type": {"enum": ["ndarray", "python object"]}}
+    }}]
 }
