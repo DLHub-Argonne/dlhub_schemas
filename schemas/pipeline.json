@@ -1,0 +1,40 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "datacite",
+    "description": "Schema for a servable function in DLHub",
+    "type": "object",
+    "properties": {
+        "datacite": {
+            "$ref": "datacite-v4.1.json#"
+        },
+        "dlhub": {
+            "$ref": "dlhub.json#"
+        },
+        "pipeline": {
+            "type": "object",
+            "description": "Data needed to run a servable",
+            "properties": {
+                "steps": {
+                    "type": "array",
+                    "description": "A list of the steps in this pipeline",
+                    "items": {
+                        "type": "object",
+                        "description": "A step in the pipeline",
+                        "properties": {
+                            "dlhub_id": {
+                                "type": "string",
+                                "description": "Identifier of a servable in DLHub",
+                                "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                            },
+                            "parameters": {
+                                "type": "object",
+                                "description": "Any default parameters for the servable. For example, the image size for a servable that resizes images",
+                                "additionalProperties": {"string": "object"}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
