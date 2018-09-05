@@ -56,6 +56,11 @@
                         "output": {
                             "$ref": "servable/argument_type.json#",
                             "description": "Output of the servable"
+                        },
+                        "parameters": {
+                            "type": "object",
+                            "description": "Any configurable parameters for the operation",
+                            "additionalParameters": {"string": "object"}
                         }
                     }
                 }
