@@ -1,37 +1,44 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "title": "argument_type",
-    "description": "Description of the inputs and outputs to a function",
-    "type": "object",
-    "properties": {
-        "type": {
-            "enum": ["number", "ndarray", "string", "python object", "boolean", "integer", "float", "complex", "timedelta", "datetime"],
-            "description": "Type of the argument. Must be one of the types recognized by DLHub."
-        },
-        "description": {
-            "type": "string",
-            "description": "Human-friendly description of the argument"
-        },
-        "shape": {
-            "type": "array",
-            "description": "Shape of an input ndarray, required if type is ndarray. Any dimensions that can be arbitrary sizes may be annotated with `null`. E.g., [null, 4]",
-            "items": {
-                "anyOf": [{"type": "integer", "minimum": 1}, {"type": "null"}]
-            }
-        },
-        "python_type": {
-            "type": "string",
-            "description": "Name of the python type. Give the full module path (e.g., pymatgen.core.Composition)"
+    "definitions": {
+        "argument_type": {
+            "description": "Description of the inputs and outputs to a function", "type": "object", "properties": {
+                "type": {
+                    "enum": [
+                        "number", "ndarray", "string", "python object", "boolean", "integer", "float", "complex",
+                        "timedelta", "datetime"
+                    ], "description": "Type of the argument. Must be one of the types recognized by DLHub."
+                }, "description": {
+                    "type": "string", "description": "Human-friendly description of the argument"
+                }, "shape": {
+                    "type": "array",
+                    "description": "Shape of an input ndarray, required if type is ndarray. Any dimensions that can be arbitrary sizes may be annotated with `null`. E.g., [null, 4]",
+                    "items": {
+                        "anyOf": [{"type": "integer", "minimum": 1}, {"type": "null"}]
+                    }
+                }, "python_type": {
+                    "type": "string",
+                    "description": "Name of the python type. Give the full module path (e.g., pymatgen.core.Composition)"
+                }, "item_type": {
+                    "$ref": "#definitions/argument_type"
+                }
+            },
+            "required": ["type"],
+            "oneOf": [
+                {
+                    "properties": {"type": {"enum": ["ndarray"]}}, "required": ["shape"]
+                }, {
+                    "properties": {"type": {"enum": ["python object"]}}, "required": ["python_type"]
+                }, {
+                    "properties": {"type": {"enum": ["list"]}}, "required": ["item_type"]
+                }, {
+                    "not": {
+                        "properties": {"type": {"enum": ["ndarray", "python object"]}}
+                    }
+                }
+            ]
         }
     },
-    "required": ["type"],
-    "oneOf": [{
-        "properties": {"type": {"enum": ["ndarray"]}},
-        "required": ["shape"]
-    },{
-        "properties": {"type": {"enum": ["python object"]}},
-        "required": ["python_type"]
-    }, {"not" :{
-        "properties": {"type": {"enum": ["ndarray", "python object"]}}
-    }}]
+    "$ref": "#definitions/argument_type"
 }

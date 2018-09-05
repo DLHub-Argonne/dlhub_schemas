@@ -1,5 +1,5 @@
-from jsonschema import Draft4Validator
-import jsonref
+from jsonschema import Draft4Validator, RefResolver
+import json
 import glob
 import os
 
@@ -13,8 +13,10 @@ for schema in schemas:
 
     # Load in the schema
     with open(schema) as fp:
-        schema = jsonref.load(fp, base_uri='file:///{}/'.format(schema_path))
+        schema = json.load(fp)
 
     # Pull in the references
-    Draft4Validator.check_schema(schema)
+    validator = Draft4Validator(Draft4Validator.META_SCHEMA,
+                                resolver=RefResolver('file:///{}/'.format(schema_path), schema))
+    validator.validate(schema)
     print('OK')
