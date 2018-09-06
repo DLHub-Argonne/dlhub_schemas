@@ -26,13 +26,18 @@
                                 "description": "Identifier of a servable in DLHub",
                                 "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
                             },
+                            "description": {
+                                "type": "string",
+                                "description": "Human-friendly description of the step"
+                            },
                             "parameters": {
                                 "type": "object",
                                 "description": "Any default parameters for the servable. For example, the image size for a servable that resizes images",
                                 "additionalProperties": {"string": "object"}
                             }
                         }
-                    }
+                    },
+                    "required": ["dlhub_id"]
                 }
             }
         }
