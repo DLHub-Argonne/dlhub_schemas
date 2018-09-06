@@ -34,7 +34,7 @@
                     "properties": {"type": {"enum": ["list"]}}, "required": ["item_type"]
                 }, {
                     "not": {
-                        "properties": {"type": {"enum": ["ndarray", "python object"]}}
+                        "properties": {"type": {"enum": ["ndarray", "python object", "list"]}}
                     }
                 }
             ]
