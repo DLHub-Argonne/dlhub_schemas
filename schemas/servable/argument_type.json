@@ -7,7 +7,7 @@
                 "type": {
                     "enum": [
                         "number", "ndarray", "string", "python object", "boolean", "integer", "float", "complex",
-                        "timedelta", "datetime"
+                        "timedelta", "datetime", "list"
                     ], "description": "Type of the argument. Must be one of the types recognized by DLHub."
                 }, "description": {
                     "type": "string", "description": "Human-friendly description of the argument"
