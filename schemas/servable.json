@@ -64,8 +64,8 @@
                         }
                     }
                 }
-            }
+            },
+            "required": ["type", "shim", "run"]
         }
-    },
-    "required": ["type", "shim", "run"]
+    }
 }
