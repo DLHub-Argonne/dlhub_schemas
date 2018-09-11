@@ -46,23 +46,6 @@
                     "description": "Longer-form description of a machine learning model. Contrast to model_type"
                 },
                 "run": {
-                    "type": "object",
-                    "description": "Description of how to invoke a servable",
-                    "properties": {
-                        "input": {
-                            "$ref": "servable/argument_type.json#",
-                            "description": "Input to the servable"
-                        },
-                        "output": {
-                            "$ref": "servable/argument_type.json#",
-                            "description": "Output of the servable"
-                        },
-                        "parameters": {
-                            "type": "object",
-                            "description": "Any configurable parameters for the operation",
-                            "additionalParameters": {"string": "object"}
-                        }
-                    }
                 }
             },
             "required": ["type", "shim", "run"]

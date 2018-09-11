@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "method",
+    "type": "object",
+    "description": "Description of how to invoke a servable",
+    "properties": {
+        "input": {
+            "$ref": "argument_type.json#",
+            "description": "Input to the servable"
+        },
+        "output": {
+            "$ref": "argument_type.json#",
+            "description": "Output of the servable"
+        },
+        "parameters": {
+            "type": "object",
+            "description": "Any configurable parameters for the operation",
+            "additionalParameters": {
+                "string": "object"
+            }
+        },
+        "method_details": {
+            "type": "object",
+            "description": "Parameters that specify how to construct the servable. For example, this could be the name of the method to run for a Python object."
+        }
+    }
+}
