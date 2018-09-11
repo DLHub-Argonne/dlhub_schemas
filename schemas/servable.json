@@ -65,6 +65,7 @@
                     "patternProperties": {
                         "^[A-z]\\w*": {"$ref": "servable/method.json#"}
                     },
+                    "required": ["run"],
                     "additionalProperties": false
                 }
             },
