@@ -29,7 +29,7 @@
                 "files": {
                     "$ref": "general/files.json#",
                     "description": "Files required to construct this servable"
-                }
+                },
                 "dependencies": {
                     "type": "object",
                     "description": "List of additional libraries required by the servable. Currently only supports Python",
