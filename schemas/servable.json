@@ -45,10 +45,30 @@
                     "type": "string",
                     "description": "Longer-form description of a machine learning model. Contrast to model_type"
                 },
-                "run": {
+                "methods": {
+                    "type": "object",
+                    "description": "Methods available for a certain servable. Mapping of method name to method description.",
+                    "properties": {
+                        "run": {
+                            "$ref": "servable/method.json#",
+                            "description": "Invoke a servable. This is the primary method of any servable"
+                        },
+                        "train": {
+                            "$ref": "servable/method.json#",
+                            "description": "Reparameterize a model provided new data"
+                        },
+                        "test": {
+                            "$ref": "servable/method.json#",
+                            "description": "Ensure that the container holding a servable is properly configured"
+                        }
+                    },
+                    "patternProperties": {
+                        "^[A-z]\\w*": {"$ref": "servable/method.json#"}
+                    },
+                    "additionalProperties": false
                 }
             },
-            "required": ["type", "shim", "run"]
+            "required": ["type", "shim"]
         }
     }
 }
