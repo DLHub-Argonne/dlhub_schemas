@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "files",
+    "description": "List of files associated with a dataset or servable. Contains both named files, which serve a specific purpose in a HomeRun shim or file reader, and a list of miscellaneous files that must be present.",
+    "properties": {
+        "other": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "List of files that must be present, but need not be directly accessed by software"
+        }
+    },
+    "additionalProperties": {"type": "string"}
+}
