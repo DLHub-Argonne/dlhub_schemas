@@ -71,11 +71,11 @@
                     },
                     "required": ["run"],
                     "additionalProperties": false
+                },
+                "options": {
+                    "type": "object",
+                    "description": "Additional metadata that describes how to construct the servable. For example, the method used to serialize an sklearn model"
                 }
-            },
-            "options": {
-                "type": "object",
-                "description": "Additional metadata that describes how to construct the servable. For example, the method used to serialize an sklearn model"
             },
             "required": ["type", "shim", "methods"],
             "additionalProperties": false
