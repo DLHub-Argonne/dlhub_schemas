@@ -15,7 +15,7 @@
         "name": {
             "type": "string",
             "description": "Short name of the artifact or servable",
-            "pattern": "^\\w+"
+            "pattern": "^\\S+$"
         },
         "visible_to": {
             "type": "array",
