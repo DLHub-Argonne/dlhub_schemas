@@ -21,7 +21,7 @@
         },
         "method_details": {
             "type": "object",
-            "description": "Parameters that specify how to construct the servable. For example, this could be the name of the method to run for a Python object."
+            "description": "Parameters that specify how to construct the servable. For example, this could be the name of the method to run for a Python object. In contrast to \"parameters\", this information is only used when the servable is being constructed."
         }
     }
 }
