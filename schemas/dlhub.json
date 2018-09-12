@@ -12,6 +12,11 @@
             "type": "string",
             "description": "Scientific application area of the artifact"
         },
+        "name": {
+            "type": "string",
+            "description": "Short name of the artifact or servable",
+            "pattern": "^\\w+"
+        },
         "visible_to": {
             "type": "array",
             "description": "List of entities that can view this artifact. Can either be a UUID specifying a Globus identity or 'public'",
@@ -40,5 +45,7 @@
                 }
             ]
         }
-    }
+    },
+    "required": ["version", "name", "id"],
+    "additionalProperties": false
 }
