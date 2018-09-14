@@ -21,9 +21,9 @@
                         "$ref": "dataset/column.json#"
                     }
                 },
-                "location": {
-                    "type": "string",
-                    "description": "Path to the data file"
+                "files": {
+                    "$ref": "general/files.json#",
+                    "description": "Files associated with this dataset"
                 },
                 "format": {
                     "type": "string",
