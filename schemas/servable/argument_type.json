@@ -3,11 +3,12 @@
     "title": "argument_type",
     "definitions": {
         "argument_type": {
-            "description": "Description of the inputs and outputs to a function", "type": "object", "properties": {
+            "description": "Description of the inputs and outputs to a function", "type": "object",
+            "properties": {
                 "type": {
                     "enum": [
                         "number", "ndarray", "string", "python object", "boolean", "integer", "float", "complex",
-                        "timedelta", "datetime", "list"
+                        "timedelta", "datetime", "list", "dict"
                     ], "description": "Type of the argument. Must be one of the types recognized by DLHub."
                 }, "description": {
                     "type": "string", "description": "Human-friendly description of the argument"
@@ -22,6 +23,10 @@
                     "description": "Name of the python type. Give the full module path (e.g., pymatgen.core.Composition)"
                 }, "item_type": {
                     "$ref": "#definitions/argument_type"
+                }, "properties": {
+                    "type": "object",
+                    "description": "Definitions for the keys of a dictionary type",
+                    "additionalProperties": {"string": {"$ref": "#defintions/argument_type"}}
                 }
             },
             "required": ["type"],
@@ -33,11 +38,14 @@
                 }, {
                     "properties": {"type": {"enum": ["list"]}}, "required": ["item_type"]
                 }, {
+                    "properties": {"type": {"enum": ["dict"]}}, "required": ["properties"]
+                }, {
                     "not": {
                         "properties": {"type": {"enum": ["ndarray", "python object", "list"]}}
                     }
                 }
-            ]
+            ],
+            "additionalProperties": false
         }
     },
     "$ref": "#definitions/argument_type"
