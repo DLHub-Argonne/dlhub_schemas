@@ -22,7 +22,18 @@
                     "type": "string",
                     "description": "Name of the python type. Give the full module path (e.g., pymatgen.core.Composition)"
                 }, "item_type": {
-                    "$ref": "#definitions/argument_type"
+                    "oneOf": [
+                        {
+                            "$ref": "#definitions/argument_type",
+                            "definition": "Argument is a list of unknown length, but all of the same type."
+                        }, {
+                            "type": "array",
+                            "definition": "Argument is a list of known length. Each type in this list is the type of each member of the argument list",
+                            "items": {
+                                "$ref": "#definitions/argument_type"
+                            }
+                        }
+                    ]
                 }, "properties": {
                     "type": "object",
                     "description": "Definitions for the keys of a dictionary type",
