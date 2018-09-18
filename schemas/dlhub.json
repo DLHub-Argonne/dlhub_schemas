@@ -44,6 +44,23 @@
                     "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
                 }
             ]
+        },
+        "transfer_method": {
+            "type": "object",
+            "description": "Information for how to access data being published to DLHub",
+            "properties": {
+                "POST": {
+                    "type": "string",
+                    "description": "Key of the file to be retrieved."
+                },
+                "globus": {
+                    "type": "string",
+                    "description": "URL for Globus transfer.",
+                    "pattern": "^globus://[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/.*$"
+                }
+            },
+            "minProperties": 1,
+            "maxProperties": 1
         }
     },
     "required": ["version", "name", "id"],
