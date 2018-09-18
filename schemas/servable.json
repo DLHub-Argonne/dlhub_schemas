@@ -56,10 +56,6 @@
                         "train": {
                             "$ref": "servable/method.json#",
                             "description": "Reparameterize a model provided new data"
-                        },
-                        "test": {
-                            "$ref": "servable/method.json#",
-                            "description": "Ensure that the container holding a servable is properly configured"
                         }
                     },
                     "patternProperties": {
