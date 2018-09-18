@@ -9,8 +9,11 @@
             "description": "Version of the DLHub service"
         },
         "domain": {
-            "type": "string",
-            "description": "Scientific application area of the artifact"
+            "type": "array",
+            "description": "Scientific application areas of the artifact",
+            "item_type": {
+                "type": "string"
+            }
         },
         "name": {
             "type": "string",
