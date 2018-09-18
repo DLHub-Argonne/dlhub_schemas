@@ -61,6 +61,10 @@
             },
             "minProperties": 1,
             "maxProperties": 1
+        },
+        "files": {
+            "$ref": "general/files.json#",
+            "description": "Files required to construct this servable"
         }
     },
     "required": ["version", "name", "id"],

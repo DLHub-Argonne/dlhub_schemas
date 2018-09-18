@@ -21,10 +21,6 @@
                         "$ref": "dataset/column.json#"
                     }
                 },
-                "files": {
-                    "$ref": "general/files.json#",
-                    "description": "Files associated with this dataset"
-                },
                 "format": {
                     "type": "string",
                     "description": "Format of the data file (e.g., csv)"
