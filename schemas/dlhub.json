@@ -8,7 +8,7 @@
             "type": "string",
             "description": "Version of the DLHub service"
         },
-        "domain": {
+        "domains": {
             "type": "array",
             "description": "Scientific application areas of the artifact",
             "item_type": {
