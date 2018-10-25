@@ -54,12 +54,17 @@
             "properties": {
                 "POST": {
                     "type": "string",
-                    "description": "Key of the file to be retrieved."
+                    "description": "Key of the file to be retrieved in the HTTP request."
                 },
                 "globus": {
                     "type": "string",
                     "description": "URL for Globus transfer.",
                     "pattern": "^globus://[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/.*$"
+                },
+                "S3": {
+                    "type": "string",
+                    "description": "Location of the data on S3. All data must be present in a ZIP file",
+                    "pattern": "^s3://.*"
                 }
             },
             "minProperties": 1,
@@ -68,6 +73,10 @@
         "files": {
             "$ref": "general/files.json#",
             "description": "Files required to construct this servable"
+        },
+        "test": {
+            "type": "boolean",
+            "description": "Internal use. Whether DLHub is actually going to do anything other than validate the request"
         }
     },
     "required": ["version", "name", "id"],
