@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "request",
+    "description": "Schema for how input data to DLHub should be defined",
+    "type": "object",
+    "properties": {
+        "data": {
+            "type": "object",
+            "description": "Data as a json document"
+        },
+        "pickle": {
+            "type": "string",
+            "description": "Data as a base64-encoded pickle object"
+        },
+        "files": {
+            "type": "object",
+            "description": "Data as a series of files",
+            "properties": {
+                "type": {
+                    "enum": ["POST", "url"],
+                    "description": "Whether the data is provided with the request or is available at a URL"
+                },
+                "files": {
+                    "type": "array",
+                    "description": "List of the file keys (if type is POST) or urls"
+                }
+            },
+            "additionalProperties": true
+        }
+    },
+    "additionalProperties": false
+}
