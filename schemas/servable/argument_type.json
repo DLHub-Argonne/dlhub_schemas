@@ -7,8 +7,9 @@
             "properties": {
                 "type": {
                     "enum": [
-                        "number", "ndarray", "string", "python object", "boolean", "integer", "float", "complex",
-                        "timedelta", "datetime", "list", "dict"
+                        "number", "ndarray", "string", "python object",
+                        "boolean", "integer", "float", "complex",
+                        "timedelta", "datetime", "list", "dict", "tuple"
                     ], "description": "Type of the argument. Must be one of the types recognized by DLHub."
                 }, "description": {
                     "type": "string", "description": "Human-friendly description of the argument"
@@ -22,18 +23,14 @@
                     "type": "string",
                     "description": "Name of the python type. Give the full module path (e.g., pymatgen.core.Composition)"
                 }, "item_type": {
-                    "oneOf": [
-                        {
-                            "$ref": "#definitions/argument_type",
-                            "definition": "Argument is a list of unknown length, but all of the same type."
-                        }, {
-                            "type": "array",
-                            "definition": "Argument is a list of known length. Each type in this list is the type of each member of the argument list",
-                            "items": {
-                                "$ref": "#definitions/argument_type"
-                            }
-                        }
-                    ]
+                    "$ref": "#definitions/argument_type",
+                    "definition": "Argument is a list of unknown length, but all of the same type."
+                }, "element_types": {
+                    "type": "array",
+                    "definition": "Each type in this list is the type of each member of a tuple",
+                    "items": {
+                        "$ref": "#definitions/argument_type"
+                    }
                 }, "properties": {
                     "type": "object",
                     "description": "Definitions for the keys of a dictionary type",
@@ -49,7 +46,11 @@
                 }, {
                     "properties": {"type": {"enum": ["list"]}}, "required": ["item_type"]
                 }, {
-                    "properties": {"type": {"enum": ["dict"]}}, "required": ["properties"]
+                    "properties": {"type": {"enum": ["dict"]}},
+                    "required": ["properties"]
+                }, {
+                    "properties": {"type": {"enum": ["tuple"]}},
+                    "required": ["element_types"]
                 }, {
                     "not": {
                         "properties": {"type": {"enum": ["ndarray", "python object", "list", "dict"]}}
