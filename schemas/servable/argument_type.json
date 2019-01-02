@@ -53,7 +53,7 @@
                     "required": ["element_types"]
                 }, {
                     "not": {
-                        "properties": {"type": {"enum": ["ndarray", "python object", "list", "dict"]}}
+                        "properties": {"type": {"enum": ["ndarray", "python object", "list", "dict", "tuple"]}}
                     }
                 }
             ],
