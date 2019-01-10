@@ -21,10 +21,13 @@
                         "type": "object",
                         "description": "A step in the pipeline",
                         "properties": {
-                            "dlhub_id": {
+                            "author": {
                                 "type": "string",
-                                "description": "Identifier of a servable in DLHub",
-                                "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                                "description": "DLHub user name of the author of this servable"
+                            }, 
+                            "name": {
+                                "type": "string",
+                                "description": "Name of the DLHub server"
                             },
                             "description": {
                                 "type": "string",
