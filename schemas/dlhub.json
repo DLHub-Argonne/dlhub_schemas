@@ -79,6 +79,6 @@
             "description": "Internal use. Whether DLHub is actually going to do anything other than validate the request"
         }
     },
-    "required": ["version", "name", "id"],
+    "required": ["version", "name"],
     "additionalProperties": false
 }
