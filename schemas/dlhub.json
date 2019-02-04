@@ -4,16 +4,25 @@
     "description": "General metadata for the DLHub service",
     "type": "object",
     "properties": {
-        "version": {
+        "dlhub_version": {
             "type": "string",
             "description": "Version of the DLHub service"
         },
+        "version": {
+            "type": "string",
+            "description": "Version of the DLHub artifact"
+        }, 
         "domains": {
             "type": "array",
             "description": "Scientific application areas of the artifact",
             "item_type": {
                 "type": "string"
             }
+        },
+        "owner": {
+            "type": "string",
+            "description": "Globus ID of the owner of the model",
+            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
         },
         "name": {
             "type": "string",
