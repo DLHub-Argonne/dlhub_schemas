@@ -8,9 +8,10 @@
             "type": "string",
             "description": "Version of the DLHub service"
         },
-        "version": {
+        "publication_date": {
             "type": "string",
-            "description": "Version of the DLHub artifact"
+            "description": "Time when this model was submitted to DLHub.",
+            "format": "date-time"
         }, 
         "domains": {
             "type": "array",
@@ -88,6 +89,6 @@
             "description": "Internal use. Whether DLHub is actually going to do anything other than validate the request"
         }
     },
-    "required": ["version", "name"],
+    "required": ["dlhub_version", "name"],
     "additionalProperties": false
 }
