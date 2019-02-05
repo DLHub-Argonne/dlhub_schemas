@@ -21,8 +21,7 @@
         },
         "owner": {
             "type": "string",
-            "description": "Globus ID of the owner of the model",
-            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+            "description": "Namespace of the owner of the model. Generally the email address minus the @ symbol and domain."
         },
         "name": {
             "type": "string",
