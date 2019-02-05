@@ -8,12 +8,20 @@
             "type": "string",
             "description": "Version of the DLHub service"
         },
+        "publication_date": {
+            "type": "integer",
+            "description": "Time when this model was submitted to DLHub, expressed as a UNIX timestamp (seconds from the Unix Epoch)"
+        }, 
         "domains": {
             "type": "array",
             "description": "Scientific application areas of the artifact",
             "item_type": {
                 "type": "string"
             }
+        },
+        "owner": {
+            "type": "string",
+            "description": "Namespace of the owner of the model. Generally the email address minus the @ symbol and domain."
         },
         "name": {
             "type": "string",
@@ -39,7 +47,7 @@
             }
         },
         "id": {
-            "description": "Unique identifier for this artifact in DLHub",
+            "description": "Unique identifier for this artifact in DLHub. Used internally",
             "anyOf": [
                 {"type": "null"},
                 {
@@ -77,8 +85,13 @@
         "test": {
             "type": "boolean",
             "description": "Internal use. Whether DLHub is actually going to do anything other than validate the request"
+        },
+        "type": {
+            "type": "string",
+            "description": "Type of this artifact.",
+            "enum": ["servable", "dataset", "pipeline"]
         }
     },
-    "required": ["version", "name"],
+    "required": ["version", "name", "type"],
     "additionalProperties": false
 }
