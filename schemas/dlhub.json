@@ -4,7 +4,7 @@
     "description": "General metadata for the DLHub service",
     "type": "object",
     "properties": {
-        "dlhub_version": {
+        "version": {
             "type": "string",
             "description": "Version of the DLHub service"
         },
@@ -93,6 +93,6 @@
             "enum": ["servable", "dataset", "pipeline"]
         }
     },
-    "required": ["dlhub_version", "name"],
+    "required": ["version", "name", "type"],
     "additionalProperties": false
 }
