@@ -22,21 +22,6 @@
                     "type": "string",
                     "description": "Name of the home_run shim that can use this metadata. Effectively, a human-unfriendly version of type."
                 },
-                "language": {
-                    "type": "string",
-                    "language": "Programming language used to invoke the servable"
-                },
-                "dependencies": {
-                    "type": "object",
-                    "description": "List of additional libraries required by the servable. Currently only supports Python",
-                    "properties": {
-                        "python": {
-                            "type": "object",
-                            "additionalProperties": {"string": "string"}
-                        }
-                    },
-                    "additionalProperties": false
-                },
                 "model_type": {
                     "type": "string",
                     "description": "Simple description of the type of machine learning model"

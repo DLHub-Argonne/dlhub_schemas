@@ -1,97 +1,125 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "title": "dlhub",
-    "description": "General metadata for the DLHub service",
-    "type": "object",
-    "properties": {
-        "version": {
-            "type": "string",
-            "description": "Version of the DLHub service"
-        },
-        "publication_date": {
-            "type": "integer",
-            "description": "Time when this model was submitted to DLHub, expressed as a UNIX timestamp (seconds from the Unix Epoch)"
-        }, 
-        "domains": {
-            "type": "array",
-            "description": "Scientific application areas of the artifact",
-            "item_type": {
-                "type": "string"
-            }
-        },
-        "owner": {
-            "type": "string",
-            "description": "Namespace of the owner of the model. Generally the email address minus the @ symbol and domain."
-        },
-        "name": {
-            "type": "string",
-            "description": "Short name of the artifact or servable",
-            "pattern": "^\\S+$"
-        },
-        "visible_to": {
-            "type": "array",
-            "description": "List of entities that can view this artifact. Can either be a UUID specifying a Globus identity or 'public'",
-            "items": {
-                "type": "string",
-                "description": "Identity allowed to see the artifact",
-                "pattern": "^public$",
-                "anyOf": [{
-                    "type": "string",
-                    "description": "UUID of an allowed identity. Corresponds to a Globus User ID or a Group ID",
-                    "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
-                },{
-                    "type": "string",
-                    "description": "Specification that model should be openly visible",
-                    "enum": ["public"]
-                }]
-            }
-        },
-        "id": {
-            "description": "Unique identifier for this artifact in DLHub. Used internally",
-            "anyOf": [
-                {"type": "null"},
-                {
-                    "type": "string",
-                    "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
-                }
-            ]
-        },
-        "transfer_method": {
-            "type": "object",
-            "description": "Information for how to access data being published to DLHub",
-            "properties": {
-                "POST": {
-                    "type": "string",
-                    "description": "Key of the file to be retrieved in the HTTP request."
-                },
-                "globus": {
-                    "type": "string",
-                    "description": "URL for Globus transfer.",
-                    "pattern": "^globus://[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/.*$"
-                },
-                "S3": {
-                    "type": "string",
-                    "description": "Location of the data on S3. All data must be present in a ZIP file",
-                    "pattern": "^s3://.*"
-                }
-            },
-            "minProperties": 1,
-            "maxProperties": 1
-        },
-        "files": {
-            "$ref": "general/files.json#",
-            "description": "Files required to construct this servable"
-        },
-        "test": {
-            "type": "boolean",
-            "description": "Internal use. Whether DLHub is actually going to do anything other than validate the request"
-        },
-        "type": {
-            "type": "string",
-            "description": "Type of this artifact.",
-            "enum": ["servable", "dataset", "pipeline"]
-        }
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "dlhub",
+  "description": "General metadata for the DLHub service",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Version of the DLHub service"
     },
-    "required": ["version", "name", "type"],
-    "additionalProperties": false
+    "publication_date": {
+      "type": "integer",
+      "description": "Time when this model was submitted to DLHub, expressed as a UNIX timestamp (seconds from the Unix Epoch)"
+    },
+    "domains": {
+      "type": "array",
+      "description": "Scientific application areas of the artifact",
+      "item_type": {
+        "type": "string"
+      }
+    },
+    "owner": {
+      "type": "string",
+      "description": "Namespace of the owner of the model. Generally the email address minus the @ symbol and domain."
+    },
+    "name": {
+      "type": "string",
+      "description": "Short name of the artifact or servable",
+      "pattern": "^\\S+$"
+    },
+    "visible_to": {
+      "type": "array",
+      "description": "List of entities that can view this artifact. Can either be a UUID specifying a Globus identity or 'public'",
+      "items": {
+        "type": "string",
+        "description": "Identity allowed to see the artifact",
+        "pattern": "^public$",
+        "anyOf": [
+          {
+            "type": "string",
+            "description": "UUID of an allowed identity. Corresponds to a Globus User ID or a Group ID",
+            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+          },
+          {
+            "type": "string",
+            "description": "Specification that model should be openly visible",
+            "enum": [
+              "public"
+            ]
+          }
+        ]
+      }
+    },
+    "id": {
+      "description": "Unique identifier for this artifact in DLHub. Used internally",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+        }
+      ]
+    },
+    "transfer_method": {
+      "type": "object",
+      "description": "Information for how to access data being published to DLHub",
+      "properties": {
+        "POST": {
+          "type": "string",
+          "description": "Key of the file to be retrieved in the HTTP request."
+        },
+        "globus": {
+          "type": "string",
+          "description": "URL for Globus transfer.",
+          "pattern": "^globus://[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/.*$"
+        },
+        "S3": {
+          "type": "string",
+          "description": "Location of the data on S3. All data must be present in a ZIP file",
+          "pattern": "^s3://.*"
+        }
+      },
+      "minProperties": 1,
+      "maxProperties": 1
+    },
+    "files": {
+      "$ref": "general/files.json#",
+      "description": "Files required to construct this servable"
+    },
+    "test": {
+      "type": "boolean",
+      "description": "Internal use. Whether DLHub is actually going to do anything other than validate the request"
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of this artifact.",
+      "enum": [
+        "servable",
+        "dataset",
+        "pipeline"
+      ]
+    },
+    "dependencies": {
+      "type": "object",
+      "description": "List of additional libraries required by the servable. Currently only supports Python",
+      "properties": {
+        "python": {
+          "type": "object",
+          "additionalProperties": {
+            "string": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "version",
+    "name",
+    "type"
+  ],
+  "additionalProperties": false
 }
