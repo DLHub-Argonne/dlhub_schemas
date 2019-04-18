@@ -8,7 +8,7 @@
                 "type": {
                     "enum": [
                         "number", "ndarray", "string", "python object",
-                        "boolean", "integer", "float", "complex", "files",
+                        "boolean", "integer", "float", "complex", "file",
                         "timedelta", "datetime", "list", "dict", "tuple"
                     ], "description": "Type of the argument. Must be one of the types recognized by DLHub."
                 }, "description": {
