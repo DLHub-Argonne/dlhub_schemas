@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "argument_type",
     "definitions": {
         "argument_type": {
@@ -8,7 +8,7 @@
                 "type": {
                     "enum": [
                         "number", "ndarray", "string", "python object",
-                        "boolean", "integer", "float", "complex",
+                        "boolean", "integer", "float", "complex", "files",
                         "timedelta", "datetime", "list", "dict", "tuple"
                     ], "description": "Type of the argument. Must be one of the types recognized by DLHub."
                 }, "description": {
@@ -35,28 +35,35 @@
                     "type": "object",
                     "description": "Definitions for the keys of a dictionary type",
                     "additionalProperties": {"string": {"$ref": "#defintions/argument_type"}}
-                }
-            },
-            "required": ["type"],
-            "oneOf": [
-                {
-                    "properties": {"type": {"enum": ["ndarray"]}}, "required": ["shape"]
-                }, {
-                    "properties": {"type": {"enum": ["python object"]}}, "required": ["python_type"]
-                }, {
-                    "properties": {"type": {"enum": ["list"]}}, "required": ["item_type"]
-                }, {
-                    "properties": {"type": {"enum": ["dict"]}},
-                    "required": ["properties"]
-                }, {
-                    "properties": {"type": {"enum": ["tuple"]}},
-                    "required": ["element_types"]
-                }, {
-                    "not": {
-                        "properties": {"type": {"enum": ["ndarray", "python object", "list", "dict", "tuple"]}}
+                }, "file_types": {
+                    "type": "array",
+                    "description": "List of the file types accepted by the servable",
+                    "items": {
+                        "type": "string",
+                        "description": "Description of the type of file accepted by the servable. Use use the MIME format",
+                        "pattern": "^[^\\s/]+/\\S+$"
                     }
                 }
+            },
+            "allOf": [
+                {
+                    "if": {"properties": {"type": {"enum": ["ndarray"]}}},
+                    "then": {"required": ["shape"]}
+                }, {
+                    "if": {"properties": {"type": {"enum": ["python object"]}}},
+                    "then": {"required": ["python_type"]}
+                }, {
+                    "if": {"properties": {"type": {"enum": ["list"]}}},
+                    "then": {"required": ["item_type"]}
+                }, {
+                    "if": {"properties": {"type": {"enum": ["dict"]}}},
+                    "then": {"required": ["properties"]}
+                }, {
+                    "if": {"properties": {"type": {"enum": ["tuple"]}}},
+                    "then": {"required": ["element_types"]}
+                }
             ],
+            "required": ["type"],
             "additionalProperties": false
         }
     },

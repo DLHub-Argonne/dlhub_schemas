@@ -1,4 +1,4 @@
-from jsonschema import Draft4Validator, RefResolver
+from jsonschema import Draft7Validator, RefResolver
 import json
 import glob
 import os
@@ -16,7 +16,7 @@ for schema in schemas:
         schema = json.load(fp)
 
     # Pull in the references
-    validator = Draft4Validator(Draft4Validator.META_SCHEMA,
+    validator = Draft7Validator(Draft7Validator.META_SCHEMA,
                                 resolver=RefResolver('file:///{}/'.format(schema_path), schema))
     validator.validate(schema)
     print('OK')
