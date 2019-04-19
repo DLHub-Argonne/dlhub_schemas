@@ -1,71 +1,135 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "argument_type",
-    "definitions": {
-        "argument_type": {
-            "description": "Description of the inputs and outputs to a function", "type": "object",
-            "properties": {
-                "type": {
-                    "enum": [
-                        "number", "ndarray", "string", "python object",
-                        "boolean", "integer", "float", "complex", "files",
-                        "timedelta", "datetime", "list", "dict", "tuple"
-                    ], "description": "Type of the argument. Must be one of the types recognized by DLHub."
-                }, "description": {
-                    "type": "string", "description": "Human-friendly description of the argument"
-                }, "shape": {
-                    "type": "array",
-                    "description": "Shape of an input ndarray, required if type is ndarray. Any dimensions that can be arbitrary sizes may be annotated with `null`. E.g., [null, 4]",
-                    "items": {
-                        "anyOf": [{"type": "integer", "minimum": 1}, {"type": "null"}]
-                    }
-                }, "python_type": {
-                    "type": "string",
-                    "description": "Name of the python type. Give the full module path (e.g., pymatgen.core.Composition)"
-                }, "item_type": {
-                    "$ref": "#definitions/argument_type",
-                    "definition": "Argument is a list of unknown length, but all of the same type."
-                }, "element_types": {
-                    "type": "array",
-                    "definition": "Each type in this list is the type of each member of a tuple",
-                    "items": {
-                        "$ref": "#definitions/argument_type"
-                    }
-                }, "properties": {
-                    "type": "object",
-                    "description": "Definitions for the keys of a dictionary type",
-                    "additionalProperties": {"string": {"$ref": "#defintions/argument_type"}}
-                }, "file_types": {
-                    "type": "array",
-                    "description": "List of the file types accepted by the servable",
-                    "items": {
-                        "type": "string",
-                        "description": "Description of the type of file accepted by the servable. Use use the MIME format",
-                        "pattern": "^[^\\s/]+/\\S+$"
-                    }
-                }
-            },
-            "allOf": [
-                {
-                    "if": {"properties": {"type": {"enum": ["ndarray"]}}},
-                    "then": {"required": ["shape"]}
-                }, {
-                    "if": {"properties": {"type": {"enum": ["python object"]}}},
-                    "then": {"required": ["python_type"]}
-                }, {
-                    "if": {"properties": {"type": {"enum": ["list"]}}},
-                    "then": {"required": ["item_type"]}
-                }, {
-                    "if": {"properties": {"type": {"enum": ["dict"]}}},
-                    "then": {"required": ["properties"]}
-                }, {
-                    "if": {"properties": {"type": {"enum": ["tuple"]}}},
-                    "then": {"required": ["element_types"]}
-                }
-            ],
-            "required": ["type"],
-            "additionalProperties": false
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "argument_type",
+  "definitions": {
+    "single_file": {
+      "type": "object",
+      "description": "Single file as an argument",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "file"
+        },
+        "file_types": {
+          "type": "array",
+          "description": "List of the file types accepted by the servable",
+          "items": {
+            "type": "string",
+            "description": "Description of the type of file accepted by the servable. Use use the MIME format",
+            "pattern": "^[^\\s/]+/\\S+$"
+          }
         }
-    },
-    "$ref": "#definitions/argument_type"
+      },
+      "required": ["type"],
+      "additionalItems": false
+    }, "file_list": {
+      "type": "object",
+      "description": "List of multiple files",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "list"
+        },
+        "item_type": {
+          "$ref": "#/definitions/single_file"
+        }
+      },
+      "required": ["type", "item_type"],
+      "additionalProperties": false
+    }, "file_tuple": {
+      "type": "object",
+      "description": "Tuple where one or more of the items are a file or file list",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "tuple"
+        },
+        "element_types": {
+          "type": "array",
+          "definition": "Types for each atom in the tuple",
+          "items": {
+            "type": "object",
+            "oneOf": [
+              {"$ref": "#/definitions/argument_type"},
+              {"$ref": "#/definitions/single_file"},
+              {"$ref": "#/definitions/file_list"}
+            ],
+            "contains": {
+              "anyOf": [
+                {"$ref": "#/definitions/single_file"},
+                {"$ref": "#/definitions/file_list"}
+              ]
+            }
+          },
+          "minLength": 1
+        }
+      },
+      "required": ["type", "element_types"]
+    }, "argument_type": {
+      "type": "object",
+      "description": "Description of the inputs and outputs to a function",
+      "properties": {
+        "type": {
+          "enum": [
+            "number", "ndarray", "string", "python object",
+            "boolean", "integer", "float", "complex",
+            "timedelta", "datetime", "list", "dict", "tuple"
+          ],
+          "description": "Type of the argument. Must be one of the types recognized by DLHub."
+        }, "description": {
+          "type": "string", "description": "Human-friendly description of the argument"
+        }, "shape": {
+          "type": "array",
+          "description": "Shape of an input ndarray, required if type is ndarray. Any dimensions that can be arbitrary sizes may be annotated with `null`. E.g., [null, 4]",
+          "items": {
+            "anyOf": [{"type": "integer", "minimum": 1}, {"type": "null"}]
+          }
+        }, "python_type": {
+          "type": "string",
+          "description": "Name of the python type. Give the full module path (e.g., pymatgen.core.Composition)"
+        }, "item_type": {
+          "$ref": "#definitions/argument_type",
+          "definition": "Argument is a list of unknown length, but all of the same type."
+        }, "element_types": {
+          "type": "array",
+          "definition": "Each type in this list is the type of each member of a tuple",
+          "items": {
+            "$ref": "#definitions/argument_type"
+          }
+        }, "properties": {
+          "type": "object",
+          "description": "Definitions for the keys of a dictionary type",
+          "additionalProperties": {
+            "$ref": "#definitions/argument_type"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"type": {"enum": ["ndarray"]}}},
+          "then": {"required": ["shape"]}
+        }, {
+          "if": {"properties": {"type": {"enum": ["python object"]}}},
+          "then": {"required": ["python_type"]}
+        }, {
+          "if": {"properties": {"type": {"enum": ["list"]}}},
+          "then": {"required": ["item_type"]}
+        }, {
+          "if": {"properties": {"type": {"enum": ["dict"]}}},
+          "then": {"required": ["properties"]}
+        }, {
+          "if": {"properties": {"type": {"enum": ["tuple"]}}},
+          "then": {"required": ["element_types"]}
+        }
+      ],
+      "required": ["type"],
+      "additionalProperties": false
+    }
+  },
+  "oneOf": [
+    {"$ref": "#definitions/argument_type"},
+    {"$ref": "#definitions/single_file"},
+    {"$ref": "#definitions/file_list"},
+    {"$ref": "#definitions/file_tuple"}
+  ]
 }
