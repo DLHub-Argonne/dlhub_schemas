@@ -3,7 +3,7 @@ python:
   - "3.6"
 install:
   - pip install jsonschema jsonref
-  - pip install py.test --upgrade
+  - pip install pytest --upgrade
 script:
   - python validate_schemas.py
   - py.test
