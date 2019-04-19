@@ -53,13 +53,13 @@
               {"$ref": "#/definitions/argument_type"},
               {"$ref": "#/definitions/single_file"},
               {"$ref": "#/definitions/file_list"}
-            ],
-            "contains": {
-              "anyOf": [
-                {"$ref": "#/definitions/single_file"},
-                {"$ref": "#/definitions/file_list"}
-              ]
-            }
+            ]
+          },
+          "contains": {
+            "anyOf": [
+              {"$ref": "#/definitions/single_file"},
+              {"$ref": "#/definitions/file_list"}
+            ]
           },
           "minLength": 1
         }

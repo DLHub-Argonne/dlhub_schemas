@@ -38,3 +38,7 @@ def test_files(validator: Draft7Validator):
     # Invalid schema: Non-list collection of files
     with pytest.raises(ValidationError):
         validator.validate({'type': 'dict', 'properties': {"a": {'type': 'files'}}})
+
+
+def test_tuple(validator: Draft7Validator):
+    validator.validate({'type': 'tuple', 'element_types': [{'type': 'float'}]})
