@@ -7,8 +7,8 @@
       "description": "Single file as an argument",
       "properties": {
         "type": {
-          "type": "string",
-          "const": "file"
+          "enum": ["file"],
+          "type": "string"
         },
         "file_types": {
           "type": "array",
