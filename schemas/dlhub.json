@@ -34,7 +34,6 @@
       "items": {
         "type": "string",
         "description": "Identity allowed to see the artifact",
-        "pattern": "^public$",
         "anyOf": [
           {
             "type": "string",
