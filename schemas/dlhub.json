@@ -30,24 +30,11 @@
     },
     "visible_to": {
       "type": "array",
-      "description": "List of entities that can view this artifact. Can either be a UUID specifying a Globus identity or 'public'",
+      "description": "List of entities that can view this artifact. Can either be an URN specifying a Globus group or user identity or 'public'",
       "items": {
         "type": "string",
         "description": "Identity allowed to see the artifact",
-        "anyOf": [
-          {
-            "type": "string",
-            "description": "UUID of an allowed identity. Corresponds to a Globus User ID or a Group ID",
-            "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
-          },
-          {
-            "type": "string",
-            "description": "Specification that model should be openly visible",
-            "enum": [
-              "public"
-            ]
-          }
-        ]
+        "pattern": "^(urn:globus:(auth:identity|groups:id):([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}))|public$"
       }
     },
     "id": {
