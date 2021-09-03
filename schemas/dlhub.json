@@ -49,7 +49,8 @@
             ]
           }
         ]
-      }
+      },
+      "minItems": 1
     },
     "id": {
       "description": "Unique identifier for this artifact in DLHub. Used internally",
